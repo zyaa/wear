@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rank</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="fonts/iconfont.css">
+    <link type="text/css" rel="stylesheet" href="css/swiper.css">
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="css/common.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="move" id="move"></div>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="homepage swiper-slide swiper-no-swiping">111</div>
+        <div class="classify swiper-slide swiper-no-swiping">222</div>
+        <div class="goodstuff swiper-slide swiper-no-swiping">333</div>
+        <div class="subject swiper-slide swiper-no-swiping">444</div>
+        <div class="my swiper-slide swiper-no-swiping">555</div>
+    </div>
+</div>
+<footer class="footer">
+    <nav class="footer-nav">
+        <a onclick="slideTo(0)"><i class="iconfont icon-top1-copy"></i>商品</a>
+        <a onclick="slideTo(1)"><i class="iconfont icon-fangdajing"></i>分类</a>
+        <a onclick="slideTo(2)"><i class="iconfont icon-wifi"></i>好货</a>
+        <a onclick="slideTo(3)"><i class="iconfont icon-shezhixiaoxitongzhi"></i>专题</a>
+        <a onclick="slideTo(4)"><i class="iconfont icon-wodezhuye"></i>我的</a>
+    </nav>
+</footer>
+    <script type="text/javascript" src="js/swiper.js"></script>
+    <script type="text/javascript" src="js/zepto.js"></script>
+   <script type="text/javascript">
+
+//*************************************尾部swiper********************************************//
+        let myswiper = new Swiper(".swiper-container", {
+            onSlideChangeStart: function (swiper) {
+                let index = swiper.activeIndex;
+                $(".footer-nav a").eq(index).css("color", "#fd6e90").siblings().css("color", "#666")
+            }
+        });
+        let slideTo = function (data) {
+            myswiper.slideTo(data)
+        };
+        $(".footer-nav a").tap(function () {
+            $(this).css("color", "#fd6e90").siblings().css("color", "#666")
+             // $(this).css("background", "#000").siblings().css("background", "#fff")
+        })
+//************************************收藏夹favorites*************************************//
+    </script>
+</body>
+</html>
