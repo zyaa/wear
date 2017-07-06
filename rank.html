@@ -9,27 +9,49 @@
     <link type="text/css" rel="stylesheet" href="css/reset.css">
     <link type="text/css" rel="stylesheet" href="css/common.css">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/favorites.css">
 </head>
 <body>
-<div class="move" id="move"></div>
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="homepage swiper-slide swiper-no-swiping">111</div>
-        <div class="classify swiper-slide swiper-no-swiping">222</div>
-        <div class="goodstuff swiper-slide swiper-no-swiping">333</div>
-        <div class="subject swiper-slide swiper-no-swiping">444</div>
-        <div class="my swiper-slide swiper-no-swiping">555</div>
+<div class="container">
+    <div class="move" id="move"></div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="homepage swiper-slide swiper-no-swiping">
+                <header class="favorites_header">
+                    <span>
+                        <i class="iconfont icon-zhongyaotongzhi"></i></span>
+                    <span>MEN'S RANKING</span>
+                    <span></span>
+                </header>
+                <nav class="favorites_nav">
+                    <ul>
+                        <li><a href="javascript:;">收藏夹</a></li>
+                        <li><a href="javascript:;">搭配</a></li>
+                        <li><a href="javascript:;">用户</a></li>
+                    </ul>
+                </nav>
+                <div class="favorites_content">
+                    <div class="favorites_tab show">123</div>
+                    <div class="favorites_tab none">456</div>
+                    <div class="favorites_tab none">789</div>
+                </div>
+            </div>
+            <div class="classify swiper-slide swiper-no-swiping">222</div>
+            <div class="goodstuff swiper-slide swiper-no-swiping">333</div>
+            <div class="subject swiper-slide swiper-no-swiping">444</div>
+            <div class="my swiper-slide swiper-no-swiping">555</div>
+        </div>
     </div>
+    <footer class="footer">
+        <nav class="footer-nav">
+            <a onclick="slideTo(0)"><i class="iconfont icon-top1-copy"></i>商品</a>
+            <a onclick="slideTo(1)"><i class="iconfont icon-fangdajing"></i>分类</a>
+            <a onclick="slideTo(2)"><i class="iconfont icon-wifi"></i>好货</a>
+            <a onclick="slideTo(3)"><i class="iconfont icon-shezhixiaoxitongzhi"></i>专题</a>
+            <a onclick="slideTo(4)"><i class="iconfont icon-wodezhuye"></i>我的</a>
+        </nav>
+    </footer>
 </div>
-<footer class="footer">
-    <nav class="footer-nav">
-        <a onclick="slideTo(0)"><i class="iconfont icon-top1-copy"></i>商品</a>
-        <a onclick="slideTo(1)"><i class="iconfont icon-fangdajing"></i>分类</a>
-        <a onclick="slideTo(2)"><i class="iconfont icon-wifi"></i>好货</a>
-        <a onclick="slideTo(3)"><i class="iconfont icon-shezhixiaoxitongzhi"></i>专题</a>
-        <a onclick="slideTo(4)"><i class="iconfont icon-wodezhuye"></i>我的</a>
-    </nav>
-</footer>
     <script type="text/javascript" src="js/swiper.js"></script>
     <script type="text/javascript" src="js/zepto.js"></script>
    <script type="text/javascript">
@@ -38,17 +60,38 @@
         let myswiper = new Swiper(".swiper-container", {
             onSlideChangeStart: function (swiper) {
                 let index = swiper.activeIndex;
-                $(".footer-nav a").eq(index).css("color", "#fd6e90").siblings().css("color", "#666")
+                $(".footer-nav a").eq(index).css({"color": "#fff",'background':'#000'}).siblings().css({"color": "#666",'background':'#fff'})
             }
         });
         let slideTo = function (data) {
             myswiper.slideTo(data)
         };
-        $(".footer-nav a").tap(function () {
-            $(this).css("color", "#fd6e90").siblings().css("color", "#666")
-             // $(this).css("background", "#000").siblings().css("background", "#fff")
-        })
 //************************************收藏夹favorites*************************************//
+//
+//
+///----------------------nav点击事件-----------------------///
+/* ***  tab切换  ****/
+    function nav_click(li,classname,displayDom){
+        let lis = document.getElementsByTagName(li);
+        let displayDoms = document.getElementsByClassName(displayDom);
+        for(let i = 0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onclick = function(){
+                //nav切换
+                for(let j = 0;j<lis.length;j++){
+                    lis[j].className='';
+                }
+                lis[i].className=classname;
+                //nav对应div的显示隐藏
+                for(let k = 0;k<displayDoms.length;k++){
+					displayDoms[k].style.display = 'none';
+                }
+				displayDoms[this.index].style.display = 'block';
+            }
+        }
+    }
+    nav_click('li','borderB','favorites_tab');
+
     </script>
 </body>
 </html>
